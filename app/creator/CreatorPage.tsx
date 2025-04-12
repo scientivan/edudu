@@ -6,7 +6,8 @@ import Modal from "../components/Modal";
 import GeneratedContent from "../components/GeneratedContent";
 import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import EdugramNFTABI from "../../lib/abi/EdugramNFTABI.json";
-import { generateTextWithGemini, generateImageWithGemini, addContentToDatabase } from "../components/api";
+import { generateTextWithGemini, generateImageWithGemini, addContentToDatabase, changePaidStatus } from "../components/api";
+import { useRouter } from "next/navigation";
 
 interface CreatorPageProps {
   onBack?: () => void;
@@ -20,41 +21,47 @@ const CreatorPage: React.FC<CreatorPageProps> = ({ onBack }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [narrative, setNarrative] = useState<string>("");
+
   const { writeContract, data: hash, isPending } = useWriteContract();
   const { isSuccess, isLoading } = useWaitForTransactionReceipt({ hash });
+
   const [isMinting, setIsMinting] = useState(false);
+  const [mintStarted, setMintStarted] = useState(false);
+  const [shouldContinue, setShouldContinue] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     const isFirstVisit = sessionStorage.getItem("firstVisit");
     if (!isFirstVisit) {
-      // localStorage.removeItem("imageUrl");
-      // localStorage.removeItem("narrative");
       sessionStorage.setItem("firstVisit", "true");
     }
   }, []);
 
   const handleGenerate = async () => {
     try {
-      console.log('di klik')
-      let imageResponse;
-      const narrativeResponse = await generateTextWithGemini({ prompt : `Develop a story of three paragraph with this story's description: ${description}` });
-      
-      imageResponse = await generateImageWithGemini({
-        prompt: `Generate only just one  highly detailed and artistic image representing this scene from a short story: ${narrativeResponse}. Make it visually compelling and unique.`,
+      console.log('Generate button clicked');
+      const narrativeResponse = await generateTextWithGemini({
+        prompt: `Develop a story of three paragraph with this story's description: ${description}`
       });
-      console.log("linknya gambar: ",  imageResponse)
-    
+
+      const imageResponse = await generateImageWithGemini({
+        prompt: `Generate only just one highly detailed and artistic image representing this scene from a short story: ${narrativeResponse}. Make it visually compelling and unique.`,
+      });
+
+      console.log("Image link: ", imageResponse);
 
       setImageUrl(imageResponse.imageUrl);
       setNarrative(narrativeResponse);
 
-      await addContentToDatabase({
+      const createdContent = await addContentToDatabase({
         title,
         desc: description,
-        imagesLink: imageResponse, // now string only
+        imagesLink: imageResponse,
         captions: narrativeResponse,
       });
 
+      localStorage.setItem("createdContent", createdContent._id);
     } catch (error) {
       console.error("Error generating content:", error);
     }
@@ -62,6 +69,7 @@ const CreatorPage: React.FC<CreatorPageProps> = ({ onBack }) => {
 
   const handleMint = async () => {
     setIsMinting(true);
+    setMintStarted(true);
     try {
       await writeContract({
         abi: EdugramNFTABI,
@@ -69,19 +77,44 @@ const CreatorPage: React.FC<CreatorPageProps> = ({ onBack }) => {
         functionName: 'mintTo',
         args: ["0xd96DAF4de578d5B42B719eD64Be4c447Bae42cC1"],
       });
-      console.log('Minting successful!');
+
+      setShouldContinue(true);
     } catch (error) {
       console.error("Minting failed:", error);
-    } finally {
       setIsMinting(false);
+      setShouldContinue(false);
     }
   };
+
+  useEffect(() => {
+    const continueAfterMint = async () => {
+      const _id = localStorage.getItem("createdContent");
+      if (_id) {
+        try {
+          await changePaidStatus({
+            title,
+            desc: description,
+          });
+          console.log("✅ Paid status updated!");
+          router.push("/explore");
+        } catch (err) {
+          console.error("Error updating paid status:", err);
+        }
+      }
+      setIsMinting(false);
+      setShouldContinue(false);
+    };
+
+    if (isSuccess && shouldContinue) {
+      continueAfterMint();
+    }
+  }, [isSuccess, shouldContinue]);
 
   return (
     <div className="flex justify-center items-center min-h-screen pb-8">
       <div className="flex gap-8 rounded-lg backdrop-blur-md">
         <div>
-        <GeneratedContent title={title} imageUrl={imageUrl} narrative={narrative} />
+          <GeneratedContent title={title} imageUrl={imageUrl} narrative={narrative} />
         </div>
 
         <div className="w-xl bg-white p-6 rounded-lg relative">
@@ -110,18 +143,17 @@ const CreatorPage: React.FC<CreatorPageProps> = ({ onBack }) => {
             <button
               style={{ backgroundColor: 'var(--highlight)' }}
               className="mt-6 text-black px-6 py-2 rounded-md w-full cursor-pointer"
-              onClick={() =>
-                handleGenerate()
-              }
+              onClick={handleGenerate}
             >
               Generate Content
             </button>
             <button
-              style={{ backgroundColor: 'var(--highlight)' }}
+              disabled={isMinting}
+              style={{ backgroundColor: 'var(--highlight)', opacity: isMinting ? 0.6 : 1 }}
               className="mt-6 text-black px-6 py-2 rounded-md w-full cursor-pointer"
               onClick={handleMint}
             >
-              Confirm2 →
+              {isMinting ? "Minting..." : "Confirm2 →"}
             </button>
           </div>
         </div>

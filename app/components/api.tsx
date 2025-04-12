@@ -92,8 +92,35 @@ export const addContentToDatabase = async ({
 // Fungsi untuk mengambil konten dari database
 export const showContentsToViewPage = async (): Promise<any[]> => {
   try {
-    const response = await api.get<{ contents: any[] }>('/get-content');
+    const response = await api.get<{ contents: any[] }>('/get-contents');
     return response.data.contents;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+export const changePaidStatus  = async({ 
+  title,
+  desc,
+  }: {
+  title: string;
+  desc: string;
+  }): 
+  Promise<any[]> => {
+  try {
+    const response = await api.post('/changePaidStatus', { title, desc}); // POST ke endpoint update
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
+
+
+export const showDetailedContent = async (id : string): Promise<any[]> => {
+  try {
+    const response = await api.post('/get-content', {id});
+    return response.data.content;
   } catch (err) {
     console.log(err);
     throw err;

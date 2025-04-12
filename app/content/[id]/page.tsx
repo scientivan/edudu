@@ -9,13 +9,14 @@ import ContentInfo from "@/app/components/content/ContentInfo";
 import RelatedContent from "@/app/components/content/RelatedContent";
 import AboutContent from "@/app/components/content/AboutContent";
 import type { ContentItemProps } from "@/app/components/explore/ContentCard";
+import {showDetailedContent } from "@/app/components/api"
 
 interface ContentDetailProps {
-  params: Promise<{ id: string }>; 
+  params: { id: string }; // ✅ Bukan Promise
 }
 
 export default function ContentDetailPage({ params }: ContentDetailProps) {
-  const { id } = use(params); 
+  const { id } = params;
   const router = useRouter();
   // const [content, setContent] = useState<ContentItemProps | null>(null);
   // const [relatedContent, setRelatedContent] = useState<ContentItemProps[]>([]);
@@ -23,61 +24,55 @@ export default function ContentDetailPage({ params }: ContentDetailProps) {
   // const totalSlides = 4; 
   const [allContent, setAllContent] = useState<ContentItemProps[]>([])
   const [currentContentIndex, setCurrentContentIndex] = useState(0)
+  // Fetch content items once when page is visited
 
 
-  // Fetch content data
+
   useEffect(() => {
-    const mainContent: ContentItemProps = {
-      id: id,
-      title: "Viking w chem music",
-      imageUrl: "/placeholder.svg?height=400&width=300",
-      creator: {
-        name: "MathTech",
-        avatar: "/placeholder.svg?height=40&width=40",
-      },
-      likes: 42,
-      views: 189,
+    const fetchData = async () => {
+      try {
+        const contentArray = await showDetailedContent(id);
+        const content = contentArray[0] 
+        console.log(content)
+        const mainContent: ContentItemProps = {
+          _id: content._id,
+          title: content.title,
+          imagesLink: content.imagesLink,
+          creator: {
+            name: "MathTech",
+            avatar: "/placeholder.svg?height=40&width=40",
+          },
+          likeCount: content.likeCount,
+          watchCount: content.watchCount,
+        };
+  
+        const otherContent: ContentItemProps[] = Array(3)
+          .fill(null)
+          .map((_, index) => ({
+            _id: `related-${index}`,
+            title: `Related Content ${index + 1}`,
+            imagesLink: "/placeholder.svg?height=200&width=150",
+            creator: {
+              name: "Creator name",
+              avatar: "/placeholder.svg?height=24&width=24",
+            },
+            likeCount: Math.floor(Math.random() * 100),
+            watchCount: Math.floor(Math.random() * 1000),
+          }));
+  
+        const combined = [mainContent, ...otherContent];
+        setAllContent(combined);
+  
+        const requestedIndex = combined.findIndex((item) => item._id === id);
+        setCurrentContentIndex(requestedIndex >= 0 ? requestedIndex : 0);
+      } catch (error) {
+        console.error("Failed to fetch contents:", error);
+      }
     };
-
-    const otherContent: ContentItemProps[] = Array(3)
-      .fill(null)
-      .map((_, index) => ({
-        id: `related-${index}`,
-        title: `Related Content ${index + 1}`,
-        imageUrl: "/placeholder.svg?height=200&width=150",
-        creator: {
-          name: "Creator name",
-          avatar: "/placeholder.svg?height=24&width=24",
-        },
-        likes: Math.floor(Math.random() * 100),
-        views: Math.floor(Math.random() * 1000),
-      }))
-    // setContent(fetchedContent);
-
-    //Combine all content with the main content as the first item
-    const combined = [mainContent, ...otherContent]
-    setAllContent(combined);
-
-    const fetchedRelatedContent: ContentItemProps[] = Array(3)
-      .fill(null)
-      .map((_, index) => ({
-        id: `related-${index}`,
-        title: index === 0 ? "Title 1" : "Title 2",
-        imageUrl: "/placeholder.svg?height=200&width=150",
-        creator: {
-          name: "Creator Name",
-          avatar: "/placeholder.svg?height=24&width=24",
-        },
-        likes: Math.floor(Math.random() * 100),
-        views: Math.floor(Math.random() * 1000),
-      }));
-
-      //Find the index of the requested content
-      const requestedIndex = combined.findIndex((item) => item.id === id)
-      setCurrentContentIndex(requestedIndex >= 0? requestedIndex : 0)
-
-  //   setRelatedContent(fetchedRelatedContent);
-  }, [id]); // ✅ Gunakan `id` dari use(params)
+  
+    fetchData();
+  }, [id]);
+  
 
   const handlePrevious = () => {
     setCurrentContentIndex((prev) =>{
@@ -129,7 +124,7 @@ const currentContent = allContent[currentContentIndex]||null
         <div className="lg:w-2/5 w-full">
           
             <ContentViewer 
-              imageUrl={currentContent.imageUrl} 
+              imageUrl={currentContent.imagesLink} 
               title={currentContent.title} 
               onPrevious={handlePrevious} 
               onNext={handleNext} 
@@ -139,7 +134,7 @@ const currentContent = allContent[currentContentIndex]||null
             <ContentInfo 
               title={currentContent.title} 
               creator={currentContent.creator} 
-              likes={currentContent.likes} 
+              likes={currentContent.likeCount} 
             />
           
         </div>

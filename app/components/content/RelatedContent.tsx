@@ -26,12 +26,12 @@ export default function RelatedContent({  items,currentIndex, onSelectIndex, onP
         <div className="flex gap-4 overflow-x-auto pb-4 no-scrollbar">
           {items.map((item, index) => (
             <div 
-              key={item.id} 
+              key={item._id} 
               className={`min-w-[200px] bg-[#1f3b5b] rounded-lg overflow-hidden cursor-pointer ${index === currentIndex? "ring-2 ring-white" : ""}`}
               onClick={() => onSelectIndex(index)}
               >
               <div className="relative aspect-[3/4] w-full">
-                <Image src={item.imageUrl || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
+                <Image src={item.imagesLink || "/placeholder.svg"} alt={item.title} fill className="object-cover" />
               </div>
               <div className="p-2 text-xs">
                 {index === currentIndex ? "Current image" : `Image ${index + 1}`}
