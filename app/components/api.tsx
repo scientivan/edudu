@@ -14,7 +14,6 @@ interface ImageResponse {
   imageUrl: string;
 }
 
-
 export interface Content {
   title: string;
   desc: string;
@@ -94,8 +93,8 @@ export const generateImageWithGemini = async (
 
 export const generateTextWithGemini = async (
   { prompt }: { prompt: string }
-): Promise<String> => {
-  const response = await api.post<String>("/generate-text", { prompt });
+): Promise<string> => {
+  const response = await api.post<string>("/generate-text", { prompt });
   return response.data;
 };
 
