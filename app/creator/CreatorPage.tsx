@@ -53,16 +53,15 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
       console.log("Image link: ", imageResponse);
 
       setImageUrl(imageResponse.imageUrl);
-      setNarrative(narrativeResponse);
+      setNarrative(narrativeResponse.generatedText);
 
       const createdContent = await addContentToDatabase({
         title,
         desc: description,
-        imagesLink: imageResponse,
-        captions: narrativeResponse,
+        imagesLink: imageResponse.imageUrl,
+        captions: [narrativeResponse.generatedText],
       });
 
-      localStorage.setItem("createdContent", createdContent._id);
     } catch (error) {
       console.error("Error generating content:", error);
     }
