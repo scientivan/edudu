@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { ethers, formatEther, BrowserProvider } from "ethers"
+import { formatEther, BrowserProvider } from "ethers"
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { X } from "lucide-react"
@@ -34,7 +34,7 @@ export default function ConnectWalletModal({
       }
 
       const provider = new BrowserProvider(window.ethereum)
-      const accounts = await provider.send("eth_requestAccounts", [])
+      // const accounts = await provider.send("eth_requestAccounts", [])
       const signer = await provider.getSigner()
       const address = await signer.getAddress()
       const network = await provider.getNetwork()

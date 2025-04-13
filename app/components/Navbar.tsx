@@ -1,7 +1,7 @@
 'use client'
 
 import { ConnectButton } from '@rainbow-me/rainbowkit'
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react'
 import Link from 'next/link'
 // import ConnectWalletModal from './ConnectWallet-Modal'
 import axios from 'axios'

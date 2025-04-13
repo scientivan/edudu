@@ -21,7 +21,7 @@ const Modal: React.FC<ModalProps> = ({
     try {
       const response = await generateTextWithGemini({ prompt : `generate (just only one) paragraph of unique and engaging stories description. Provide the response as a complete paragraph. Do not include any introductory or concluding words.` });
 
-      const stories: string[] = response
+      const stories: string[] = response.generatedText
         .split("\n\n")
         .map((story: string) => story.trim())
         .filter((story: string) => story.length > 0);
