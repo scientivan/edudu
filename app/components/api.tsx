@@ -97,8 +97,8 @@ export const generateImageWithGemini = async (
 
 export const generateTextWithGemini = async (
   { prompt }: { prompt: string }
-): Promise<TextResponse> => {
-  const response = await api.post<TextResponse>("/generate-text", { prompt });
+): Promise<String> => {
+  const response = await api.post<String>("/generate-text", { prompt });
   return response.data;
 };
 
