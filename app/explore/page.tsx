@@ -19,7 +19,7 @@ export default function ExplorePage() {
   useEffect(() => {
     const fetchContents = async () => {
       try {
-        /
+        
         const contents = await showContentsToViewPage()
         const formattedContents: ContentItemProps[] = contents.map((item: Content) => ({
           title: item.title,
