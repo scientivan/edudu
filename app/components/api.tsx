@@ -121,11 +121,21 @@ export const changePaidStatus = async (
   return response.data;
 };
 
-export const showDetailedContent = async (
-  id: string
-): Promise<Content[]> => {
-  const response = await api.post<DetailResponse>('/get-content', { id });
-  return response.data.content;
+// export const showDetailedContent = async (
+//   id: string
+// ): Promise<Content[]> => {
+//   const response = await api.post<DetailResponse>('/get-content', { id });
+//   return response.data.content;
+// };
+
+export const showDetailedContent = async (id : string): Promise<any[]> => {
+  try {
+    const response = await api.post('/get-content', {id});
+    return response.data.content;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
 
 // export const googleLogout = async (): Promise<void> => {

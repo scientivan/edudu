@@ -12,7 +12,7 @@ import type { ContentItemProps } from "@/app/components/explore/ContentCard";
 import {showDetailedContent } from "@/app/components/api"
 
 interface ContentDetailProps {
-  params: { id: string }; // ✅ Bukan Promise
+  params: { id: string }; // 
 }
 
 export default function ContentDetailPage({ params }: ContentDetailProps) {

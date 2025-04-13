@@ -6,12 +6,12 @@ export interface ContentItemProps {
   _id: string;
   title: string;
   imagesLink: string;
-  // creator: {
+  likeCount: number;
+  watchCount: number;
+    // creator: {
   //   name: string;
   //   avatar: string;
   // };
-  likeCount: number;
-  watchCount: number;
 }
 
 export default function ContentCard({
