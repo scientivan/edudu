@@ -14,9 +14,6 @@ interface ImageResponse {
   imageUrl: string;
 }
 
-interface TextResponse {
-  generatedText: string;
-}
 
 export interface Content {
   title: string;
