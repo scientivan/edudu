@@ -22,7 +22,6 @@ export default function ExplorePage() {
         
         const contents = await showContentsToViewPage()
         const formattedContents: ContentItemProps[] = contents.map((item: Content) => ({
-          _id: item._id, // atau item._id, tergantung API kamu
           title: item.title,
           imagesLink: item.imagesLink,
           likeCount: item.likeCount,
