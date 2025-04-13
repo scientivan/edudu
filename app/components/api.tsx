@@ -1,6 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import type { ContentItemProps } from "@/app/components/explore/ContentCard";
 
 // =====================
 // TIPE DATA
@@ -32,9 +33,6 @@ interface ErrorResponse {
   message?: string;
 }
 
-interface DetailResponse {
-  content: Content[];
-}
 
 // =====================
 // KONFIGURASI AXIOS
@@ -128,9 +126,9 @@ export const changePaidStatus = async (
 //   return response.data.content;
 // };
 
-export const showDetailedContent = async (id : string): Promise<any[]> => {
+export const showDetailedContent = async (id: string): Promise<ContentItemProps[]> => {
   try {
-    const response = await api.post('/get-content', {id});
+    const response = await api.post('/get-content', { id });
     return response.data.content;
   } catch (err) {
     console.log(err);
