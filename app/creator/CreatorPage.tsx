@@ -60,6 +60,8 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
         desc: description,
         imagesLink: imageResponse.imageUrl,
         captions: [narrativeResponse.generatedText],
+        likeCount : 0,
+        watchCount : 0,
       });
       // localStorage.setItem("createdContent", createdContent._id);
     } catch (error) {

@@ -20,7 +20,15 @@ export default function ExplorePage() {
     const fetchContents = async () => {
       try {
         const contents = await showContentsToViewPage()
-        setContentItems(contents)
+        const formattedContents: ContentItemProps[] = contents.map((item: any) => ({
+          _id: item._id, // atau item._id, tergantung API kamu
+          title: item.title,
+          imagesLink: item.imagesLink,
+          likeCount: item.likeCount,
+          watchCount: item.watchCount,
+          // jika ada creator, bisa tambahkan juga
+        }))
+        setContentItems(formattedContents)
       } catch (error) {
         console.error("Failed to fetch contents:", error)
       }
