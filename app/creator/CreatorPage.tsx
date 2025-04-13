@@ -53,13 +53,13 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
       console.log("Image link: ", imageResponse);
 
       setImageUrl(imageResponse.imageUrl);
-      setNarrative(narrativeResponse.generatedText);
+      setNarrative(narrativeResponse);
 
       await addContentToDatabase({
         title,
         desc: description,
         imagesLink: imageResponse.imageUrl,
-        captions: [narrativeResponse.generatedText],
+        captions: [narrativeResponse],
         likeCount : 0,
         watchCount : 0,
       });
