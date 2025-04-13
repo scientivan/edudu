@@ -55,13 +55,13 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
       setImageUrl(imageResponse.imageUrl);
       setNarrative(narrativeResponse.generatedText);
 
-      const createdContent = await addContentToDatabase({
+      await addContentToDatabase({
         title,
         desc: description,
         imagesLink: imageResponse.imageUrl,
         captions: [narrativeResponse.generatedText],
       });
-
+      // localStorage.setItem("createdContent", createdContent._id);
     } catch (error) {
       console.error("Error generating content:", error);
     }
@@ -88,8 +88,6 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
 
   useEffect(() => {
     const continueAfterMint = async () => {
-      const _id = localStorage.getItem("createdContent");
-      if (_id) {
         try {
           await changePaidStatus({
             title,
@@ -100,7 +98,7 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
         } catch (err) {
           console.error("Error updating paid status:", err);
         }
-      }
+
       setIsMinting(false);
       setShouldContinue(false);
     };
