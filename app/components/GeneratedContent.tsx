@@ -34,13 +34,13 @@ const GeneratedContent: React.FC<GeneratedContentProps> = ({ title: initialTitle
   }, [imageUrl, narrative]);
 
   // prev image dan next imagenya masih error karena aku generatenya cuma untuk satu foto, next harus dicoba dengan tiga foto
-  const prevImage = () => {
-    setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-  };
+  // const prevImage = () => {
+  //   setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  // };
 
-  const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-  };
+  // const nextImage = () => {
+  //   setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  // };
 
   // ✅ Guard clause untuk menghindari akses ke index array kosong
   if (images.length === 0) {
@@ -48,8 +48,8 @@ const GeneratedContent: React.FC<GeneratedContentProps> = ({ title: initialTitle
   }
 
   // ✅ Hitung prev/next index hanya setelah images tersedia
-  const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
-  const nextIndex = (currentImageIndex + 1) % images.length;
+  // const prevIndex = (currentImageIndex - 1 + images.length) % images.length;
+  // const nextIndex = (currentImageIndex + 1) % images.length;
 
   return (
     <div className="w-xl h-xl bg-white p-6 rounded-lg relative">

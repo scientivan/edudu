@@ -13,8 +13,9 @@ interface CreatorPageProps {
   onBack?: () => void;
 }
 
-const CreatorPage: React.FC<CreatorPageProps> = ({ onBack }) => {
-  const [title, setTitle] = useState("Click to edit");
+const CreatorPage: React.FC<CreatorPageProps> = () => {
+  // const [title, setTitle] = useState("Click to edit");
+  const title = "Click to Edit"
   const [description, setDescription] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [voiceStyle, setVoiceStyle] = useState("Presets 1");
@@ -22,11 +23,11 @@ const CreatorPage: React.FC<CreatorPageProps> = ({ onBack }) => {
   const [imageUrl, setImageUrl] = useState<string | undefined>(undefined);
   const [narrative, setNarrative] = useState<string>("");
 
-  const { writeContract, data: hash, isPending } = useWriteContract();
+  const { writeContract, data: hash } = useWriteContract();
   const { isSuccess, isLoading } = useWaitForTransactionReceipt({ hash });
 
   const [isMinting, setIsMinting] = useState(false);
-  const [mintStarted, setMintStarted] = useState(false);
+  // const [mintStarted, setMintStarted] = useState(false);
   const [shouldContinue, setShouldContinue] = useState(false);
 
   const router = useRouter();
@@ -69,7 +70,7 @@ const CreatorPage: React.FC<CreatorPageProps> = ({ onBack }) => {
 
   const handleMint = async () => {
     setIsMinting(true);
-    setMintStarted(true);
+    // setMintStarted(true);
     try {
       await writeContract({
         abi: EdugramNFTABI,

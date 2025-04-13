@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import Navbar from './components/Navbar';
+// import Link from 'next/link'
+// import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
 import Carousel, {type CarouselItem} from "./components/Carousel"
 async function getCarouseItems(): Promise<CarouselItem[]>{

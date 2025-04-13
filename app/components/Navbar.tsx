@@ -3,7 +3,7 @@
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import React, { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
-import ConnectWalletModal from './ConnectWallet-Modal'
+// import ConnectWalletModal from './ConnectWallet-Modal'
 import axios from 'axios'
 
 import {
@@ -14,8 +14,8 @@ import {
 } from 'wagmi'
 
 const Navbar = () => {
-  const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
-  const connectButtonRef = useRef<HTMLButtonElement | null>(null)
+  // const [isWalletModalOpen, setIsWalletModalOpen] = useState(false)
+  // const connectButtonRef = useRef<HTMLButtonElement | null>(null)
 
   const { address, isConnected } = useAccount()
   const { data: balance } = useBalance({ address })
@@ -125,11 +125,11 @@ const Navbar = () => {
         </div>
       )}
 
-      <ConnectWalletModal
+      {/* <ConnectWalletModal
         isOpen={isWalletModalOpen}
         onClose={() => setIsWalletModalOpen(false)}
         buttonRef={connectButtonRef}
-      />
+      /> */}
     </header>
   )
 }

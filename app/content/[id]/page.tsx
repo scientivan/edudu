@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
 import Bar from "@/app/components/content/Bar";
@@ -38,10 +38,10 @@ export default function ContentDetailPage({ params }: ContentDetailProps) {
           _id: content._id,
           title: content.title,
           imagesLink: content.imagesLink,
-          creator: {
-            name: "MathTech",
-            avatar: "/placeholder.svg?height=40&width=40",
-          },
+          // creator: {
+          //   name: "MathTech",
+          //   avatar: "/placeholder.svg?height=40&width=40",
+          // },
           likeCount: content.likeCount,
           watchCount: content.watchCount,
         };
@@ -133,7 +133,7 @@ const currentContent = allContent[currentContentIndex]||null
             />
             <ContentInfo 
               title={currentContent.title} 
-              creator={currentContent.creator} 
+              // creator={currentContent.creator} 
               likes={currentContent.likeCount} 
             />
           

@@ -73,7 +73,7 @@ export default function Carousel({ items = [], isLoading = false }: CarouselProp
     const itemsToShow = []
     
     for (let i = -2; i <= 2; i++) {
-      let index = (currentIndex + i + totalItems) % totalItems
+      const index = (currentIndex + i + totalItems) % totalItems
       itemsToShow.push({
         ...displayItems[index],
         relativeIndex: i // Store the relative position for easy reference

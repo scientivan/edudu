@@ -6,9 +6,6 @@ import GlassBox from "../components/GlassBox";
 import CreatorPage from "./CreatorPage";
 import {
     useAccount,
-    useBalance,
-    useChainId,
-    useConfig,
   } from 'wagmi'
 
   

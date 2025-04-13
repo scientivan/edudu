@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Navbar from "../components/Navbar"
+// import Navbar from "../components/Navbar"
 import SearchBar from "../components/SearchBar"
 import SubjectFilter from "../components/explore/SubjectFilter"
 import ContentGrid from "../components/explore/ContentGrid"

@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useRouter } from "next/navigation"
+// import { useRouter } from "next/navigation"
 
 interface ContentViewerProps {
   imageUrl: string
@@ -14,7 +14,7 @@ interface ContentViewerProps {
 }
 
 export default function ContentViewer({ imageUrl, title, onPrevious, onNext, currentIndex, totalItems  }: ContentViewerProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const isFirstItem = currentIndex === 0;
   const isLastItem = currentIndex === totalItems - 1;
   return (

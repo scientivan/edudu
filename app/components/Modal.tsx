@@ -1,5 +1,5 @@
 // Modal.tsx
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { generateTextWithGemini } from "../components/api";
 
 interface ModalProps {
@@ -12,18 +12,13 @@ const Modal: React.FC<ModalProps> = ({
   setFieldValue,
 }) => {
   const [tempText, setTempText] = useState("");
-  const [suggestions, setSuggestions] = useState<string[]>([]);
+  // const [suggestions, setSuggestions] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const getPrompt = () => {
-    const content = localStorage.getItem("savedContent") || "";
-
-  };
 
   const generateSuggestions = async () => {
     setLoading(true);
     try {
-      const prompt = getPrompt();
       const response = await generateTextWithGemini({ prompt : `generate (just only one) paragraph of unique and engaging stories description. Provide the response as a complete paragraph. Do not include any introductory or concluding words.` });
 
       const stories: string[] = response
@@ -32,8 +27,6 @@ const Modal: React.FC<ModalProps> = ({
         .filter((story: string) => story.length > 0);
 
       setTempText(stories[0]||"");
-    } catch {
-      setSuggestions(["Gagal mengambil saran."]);
     } finally {
       setLoading(false);
     }

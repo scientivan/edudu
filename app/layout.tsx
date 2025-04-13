@@ -1,6 +1,6 @@
 import './globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
-import type { Metadata } from 'next';
+// import type { Metadata } from 'next';
 import ClientLayoutWrapper from './components/ClientLayoutWrapper';
 
 // export const metadata: Metadata = {

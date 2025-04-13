@@ -3,7 +3,7 @@
 import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import type { ContentItemProps } from "../explore/ContentCard"
-import { useRouter } from "next/navigation"
+// import { useRouter } from "next/navigation"
 
 interface RelatedContentProps {
   items: ContentItemProps[]
