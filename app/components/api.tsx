@@ -18,11 +18,13 @@ interface TextResponse {
   generatedText: string;
 }
 
-interface Content {
+export interface Content {
   title: string;
   desc: string;
   imagesLink: string;
   captions: string[];
+  likeCount : number,
+  watchCount : number
 }
 
 interface ContentsResponse {

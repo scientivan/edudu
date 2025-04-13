@@ -7,7 +7,7 @@ import SubjectFilter from "../components/explore/SubjectFilter"
 import ContentGrid from "../components/explore/ContentGrid"
 import type { ContentItemProps } from "../components/explore/ContentCard"
 import { showContentsToViewPage } from "../components/api"
-
+import { Content } from "../components/api"
 export default function ExplorePage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedSubject, setSelectedSubject] = useState<string | null>(null)
@@ -19,8 +19,9 @@ export default function ExplorePage() {
   useEffect(() => {
     const fetchContents = async () => {
       try {
+        
         const contents = await showContentsToViewPage()
-        const formattedContents: ContentItemProps[] = contents.map((item: any) => ({
+        const formattedContents: ContentItemProps[] = contents.map((item: Content) => ({
           _id: item._id, // atau item._id, tergantung API kamu
           title: item.title,
           imagesLink: item.imagesLink,
