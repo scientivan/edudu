@@ -49,7 +49,7 @@ const Navbar = () => {
       const sendWalletInfo = async () => {
         try {
           const response = await axios.post(
-            'http://localhost:3300/api/wallet-connect',
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/wallet-connect`,
             {
               address,
               chainId,
@@ -76,7 +76,7 @@ const Navbar = () => {
       const sendLogout = async () => {
         try {
           const res = await axios.post(
-            'http://localhost:3300/logout',
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/logout`,
             {
               address: previousAddressRef.current, // 👈 Gunakan address terakhir
             },
