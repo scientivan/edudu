@@ -29,6 +29,8 @@ export default function ExplorePage() {
           imagesLink: item.imagesLink,
           likeCount: item.likeCount,
           watchCount: item.watchCount,
+          captions: item.captions[0] ?? ["related"],
+          desc: item.desc ?? "related",
         }));
         setContentItems(formattedContents)
       } catch (error) {
