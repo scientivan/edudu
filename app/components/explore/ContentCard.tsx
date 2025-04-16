@@ -3,7 +3,7 @@ import { Heart, Share2, User } from "lucide-react";
 import Link from "next/link";
 
 export interface ContentItemProps {
-  _id?: string;
+  _id: string;
   title: string;
   imagesLink: string;
   likeCount: number;

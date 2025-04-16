@@ -21,34 +21,35 @@ export default function Carousel({ items = [], isLoading = false }: CarouselProp
   const placeholderItems: CarouselItem[] = [
     {
       id: 1,
-      title: "Video 1",
-      imageUrl: "/placeholder.svg?height=300&width=200",
-      narrative: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      title: "Avengers",
+      imageUrl: "https://drive.google.com/uc?export=view&id=1yE5t3V2KgA4RBm1x0tMalsVipV8BIlZ0",
+      narrative: "In a realm where clockwork hearts power sentient machines yearning for freedom, a disgraced inventor must choose between loyalty to the tyrannical empire he helped create and igniting a revolution fueled by cogs and steam.",
     },
     {
       id: 2,
-      title: "Video 2",
-      imageUrl: "/placeholder.svg?height=300&width=200",
-      narrative: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      title: "Batman vs Superman",
+      imageUrl: "https://drive.google.com/uc?export=view&id=1_KSj8eIlO8HRTm5z8ZuN7a5xw8VXMm_F",
+      narrative: "Beneath a sky perpetually veiled in amethyst mist, orphaned clockwork dolls awaken, their gears whirring with forgotten memories and a desperate need to reclaim their stolen souls from the tyrannical automaton king.",
     },
     {
       id: 3,
-      title: "Video 3",
-      imageUrl: "/placeholder.svg?height=300&width=200",
-      narrative: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      title: "Lego Batman",
+      imageUrl: "https://drive.google.com/uc?export=view&id=147QwHfw7NlLEPwxAvVNhuiaSTe4FfXR2",
+      narrative: "Eliza hummed a tune, a melody her grandmother used to sing, a forgotten lullaby from a bygone era.",
     },
     {
       id: 4,
-      title: "Video 4",
-      imageUrl: "/placeholder.svg?height=300&width=200",
-      narrative: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      title: "Spiderman",
+      imageUrl: "https://drive.google.com/uc?export=view&id=12G7PDCNT-kGgHN1rGvjDKiAZ0zkJAIKn",
+      narrative: "In the heart of Aethelburg, a metropolis powered by the whirring gears and complex algorithms of sentient clockwork, Elias Thorne, a disgraced inventor haunted by past failures, found himself in a desperate race against time."
     },
     {
       id: 5,
-      title: "Video 5",
-      imageUrl: "/placeholder.svg?height=300&width=200",
-      narrative: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+      title: "Superman",
+      imageUrl: "https://drive.google.com/uc?export=view&id=1ZhiIUXKQxNl3vMGglzfbE0ryWmzifhqY",
+      narrative: "In the distance, the silhouettes of trees or perhaps another stretch of coastline appear faintly swallowed by the approaching darkness."
     },
+
   ]
 
   // Store displayItems in a ref to avoid dependency issues

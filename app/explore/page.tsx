@@ -22,6 +22,7 @@ export default function ExplorePage() {
         
         const contents = await showContentsToViewPage()
         const formattedContents: ContentItemProps[] = contents.map((item: Content) => ({
+          _id : item._id,
           title: item.title,
           imagesLink: item.imagesLink,
           likeCount: item.likeCount,
@@ -57,7 +58,7 @@ export default function ExplorePage() {
         </div>
 
         {/* Content Grid */}
-        <ContentGrid items={filteredContent} />
+        <ContentGrid items={filteredContent} key={Math.random()}/>
       </main>
     </div>
   )

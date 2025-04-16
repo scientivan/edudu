@@ -1,5 +1,4 @@
-"use client";
-
+"use client"
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { X } from "lucide-react";
@@ -10,11 +9,12 @@ import RelatedContent from "@/app/components/content/RelatedContent";
 import AboutContent from "@/app/components/content/AboutContent";
 import type { ContentItemProps } from "@/app/components/explore/ContentCard";
 import { showDetailedContent } from "@/app/components/api";
-import { useParams } from "next/navigation";  // Import useParams
+import { useParams } from "next/navigation";
 
 export default function ContentDetailPage() {
-  // Use useParams hook to get the id directly
-  const { id } = useParams<{ id: string }>();
+  const params = useParams();
+  console.log(params)
+  const id = params.id as string;
   const router = useRouter();
   const [allContent, setAllContent] = useState<ContentItemProps[]>([]);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
@@ -22,7 +22,7 @@ export default function ContentDetailPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
+      
         const contentArray = await showDetailedContent(id);
         const content = contentArray[0];
         const mainContent: ContentItemProps = {
