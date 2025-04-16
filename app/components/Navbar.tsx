@@ -60,9 +60,9 @@ const Navbar = () => {
               withCredentials: true,
             }
           )
-          // console.log('Wallet data sent:', response.data)
+          console.log('Wallet data sent:', response.data)
         } catch (error) {
-          // console.error('Error sending wallet data:', error)
+          console.error('Error sending wallet data:', error)
         }
       }
 
@@ -82,7 +82,7 @@ const Navbar = () => {
             },
             { withCredentials: true }
           )
-          // console.log('Wallet disconnected, logout sent:', res.data)
+          console.log('Wallet disconnected, logout sent:', res.data)
         } catch (err) {
           console.error('Error during wallet logout:', err)
         }
