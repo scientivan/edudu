@@ -21,14 +21,15 @@ export default function ExplorePage() {
       try {
         
         const contents = await showContentsToViewPage()
-        const formattedContents: ContentItemProps[] = contents.map((item: Content) => ({
-          _id : item._id,
+        const formattedContents: ContentItemProps[] = contents
+        .filter((item): item is Content & { _id: string } => !!item._id)
+        .map((item) => ({
+          _id: item._id,
           title: item.title,
           imagesLink: item.imagesLink,
           likeCount: item.likeCount,
           watchCount: item.watchCount,
-          // jika ada creator, bisa tambahkan juga
-        }))
+        }));
         setContentItems(formattedContents)
       } catch (error) {
         console.error("Failed to fetch contents:", error)

@@ -15,7 +15,7 @@ interface ImageResponse {
 }
 
 export interface Content {
-  _id : string;
+  _id? : string;
   title: string;
   desc: string;
   imagesLink: string;
