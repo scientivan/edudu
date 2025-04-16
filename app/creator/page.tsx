@@ -22,7 +22,7 @@ const Page: React.FC = () => {
                     `${process.env.NEXT_PUBLIC_API_BASE_URL}/check-auth?address=${address}`,
                     { withCredentials: true }
                 );
-                console.log("✅ Auth success:", response.data);
+                // console.log("✅ Auth success:", response.data);
                 setIsAuthenticated(true);
             } catch (err) {
                 console.warn("❌ Not authenticated:", err);

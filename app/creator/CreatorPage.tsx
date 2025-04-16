@@ -41,7 +41,7 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
 
   const handleGenerate = async () => {
     try {
-      console.log('Generate button clicked');
+      // console.log('Generate button clicked');
       const narrativeResponse = await generateTextWithGemini({
         prompt: `Develop a story of three paragraph with this story's description: ${description}`
       });
@@ -50,7 +50,7 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
         prompt: `Generate only just one highly detailed and artistic image representing this scene from a short story: ${narrativeResponse}. Make it visually compelling and unique.`,
       });
 
-      console.log("Image link: ", imageResponse);
+      // console.log("Image link: ", imageResponse);
 
       setImageUrl(imageResponse.imageUrl);
       setNarrative(narrativeResponse);

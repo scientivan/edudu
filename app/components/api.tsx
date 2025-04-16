@@ -70,7 +70,7 @@ export const useAuthCheck = (): boolean | null => {
         const { data } = await api.get<AuthResponse>("/check-auth");
         setIsAuthenticated(data.authenticated);
       } catch {
-        console.log('false');
+        // console.log('false');
         setIsAuthenticated(false);
         navigate("/login");
       }
@@ -130,7 +130,7 @@ export const showDetailedContent = async (id: string): Promise<ContentItemProps[
     const response = await api.post('/get-content', { id });
     return response.data.content;
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     throw err;
   }
 };

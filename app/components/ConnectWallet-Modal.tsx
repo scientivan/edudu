@@ -172,7 +172,6 @@ export default function ConnectWalletModal({
                 key={wallet.id}
                 className="flex items-center w-full p-3 rounded-md bg-white/10 hover:bg-white/20 transition-colors"
                 onClick={() => {
-                  console.log("clicked wallet")
                   connectWallet(wallet.id)
                 }}
               >

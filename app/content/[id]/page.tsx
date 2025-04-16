@@ -8,12 +8,11 @@ import ContentInfo from "@/app/components/content/ContentInfo";
 import RelatedContent from "@/app/components/content/RelatedContent";
 import AboutContent from "@/app/components/content/AboutContent";
 import type { ContentItemProps } from "@/app/components/explore/ContentCard";
-import { showDetailedContent } from "@/app/components/api";
+import { showDetailedContent, showContentsToViewPage } from "@/app/components/api";
 import { useParams } from "next/navigation";
 
 export default function ContentDetailPage() {
   const params = useParams();
-  console.log(params)
   const id = params.id as string;
   const router = useRouter();
   const [allContent, setAllContent] = useState<ContentItemProps[]>([]);
@@ -31,22 +30,26 @@ export default function ContentDetailPage() {
           imagesLink: content.imagesLink,
           likeCount: content.likeCount,
           watchCount: content.watchCount,
+          captions : content.captions,
+          desc : content.desc
         };
-
-        const otherContent: ContentItemProps[] = Array(3)
-          .fill(null)
-          .map((_, index) => ({
-            _id: `related-${index}`,
-            title: `Related Content ${index + 1}`,
-            imagesLink: "/placeholder.svg?height=200&width=150",
-            creator: {
-              name: "Creator name",
-              avatar: "/placeholder.svg?height=24&width=24",
-            },
-            likeCount: Math.floor(Math.random() * 100),
-            watchCount: Math.floor(Math.random() * 1000),
-          }));
-
+        
+        const contentsArray = await showContentsToViewPage()
+        
+        const otherContent: ContentItemProps[] = contentsArray
+          .filter((item) => item._id !== content._id) // Filter out the content with the same _id
+          .map((item, index) => {
+            return {
+              _id: item._id ?? `related-${index}`,
+              title: item.title ?? `Related Content ${index + 1}`,
+              imagesLink: item.imagesLink ?? "/placeholder.svg?height=200&width=150",
+              likeCount: item.likeCount ?? Math.floor(Math.random() * 100),
+              watchCount: item.watchCount ?? Math.floor(Math.random() * 1000),
+              captions: item.captions[0] ?? ["related"],
+              desc: item.desc ?? "related",
+            };
+          });
+          
         const combined = [mainContent, ...otherContent];
         setAllContent(combined);
 
@@ -90,7 +93,7 @@ export default function ContentDetailPage() {
     );
   }
 
-  const contentDescription = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...`;
+  const contentDescription = currentContent.desc;
 
   return (
     <div className="min-h-screen text-white">
