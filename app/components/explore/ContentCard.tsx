@@ -8,6 +8,8 @@ export interface ContentItemProps {
   imagesLink: string;
   likeCount: number;
   watchCount: number;
+  captions : string;
+  desc : string;
     // creator: {
   //   name: string;
   //   avatar: string;

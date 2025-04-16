@@ -35,7 +35,7 @@ export default function ContentDetailPage() {
         };
         
         const contentsArray = await showContentsToViewPage()
-        
+        console.log(contentsArray)
         const otherContent: ContentItemProps[] = contentsArray
           .filter((item) => item._id !== content._id) // Filter out the content with the same _id
           .map((item, index) => {
