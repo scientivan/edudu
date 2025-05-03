@@ -2,9 +2,9 @@ import { getDefaultConfig } from '@rainbow-me/rainbowkit';
 import { defineChain } from 'viem';
 import { QueryClient } from '@tanstack/react-query';
 
-export const educhain_Testnet = defineChain({
+export const learnify_Testnet = defineChain({
   id: 656476,
-  name: 'Educhain Testnet',
+  name: 'Learnify Testnet',
   nativeCurrency: {
     decimals: 18,
     name: 'EDU',
@@ -27,8 +27,8 @@ export const educhain_Testnet = defineChain({
 export const queryClient = new QueryClient();
 
 export const config = getDefaultConfig({
-  appName: 'Edugram',
+  appName: 'Learnify',
   projectId: 'YOUR_PROJECT_ID',
-  chains: [educhain_Testnet],
+  chains: [learnify_Testnet],
   ssr: true,
 });

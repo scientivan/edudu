@@ -5,7 +5,7 @@ import CategorySelector from "../components/CategorySelector";
 import Modal from "../components/Modal";
 import GeneratedContent from "../components/GeneratedContent";
 import { useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import EdugramNFTABI from "../../lib/abi/EdugramNFTABI.json";
+import LearnifyNFTABI from "../../lib/abi/LearnifyNFTABI.json";
 import { generateTextWithGemini, generateImageWithGemini, addContentToDatabase, changePaidStatus } from "../components/api";
 import { useRouter } from "next/navigation";
 
@@ -74,7 +74,7 @@ const CreatorPage: React.FC<CreatorPageProps> = () => {
     // setMintStarted(true);
     try {
       await writeContract({
-        abi: EdugramNFTABI,
+        abi: LearnifyNFTABI,
         address: '0x412D0d0a077548da4C80e569801E52bB0dF944c0',
         functionName: 'mintTo',
         args: ["0xd96DAF4de578d5B42B719eD64Be4c447Bae42cC1"],

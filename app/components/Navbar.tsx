@@ -103,7 +103,7 @@ const Navbar = () => {
       <div className='flex items-center gap-2'>
         <div className='w-8 h-8 bg-white rounded'></div>
         <Link href='/' className='font-semibold text-lg text-[#EACA91]'>
-          Edugram
+        learnify
         </Link>
       </div>
 
